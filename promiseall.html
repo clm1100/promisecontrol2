@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./jquery.js"></script>
+    <script>
+    
+
+    function Vueresouce(url){
+        let p =  new Promise((resolve,reject)=>{
+            $.get(url,function(data){
+            resolve(data)
+            })
+        })
+        return p;
+    }
+
+
+
+    Promise.all([
+        new Promise((resolve,reject)=>{
+            resolve("我是同步的")
+        }),
+        Vueresouce("https://cnodejs.org/api/v1/topics?tab=ask"),
+        Vueresouce("https://cnodejs.org/api/v1/topics?tab=share"),
+        Vueresouce("https://cnodejs.org/api/v1/topics?tab=good"),
+        Vueresouce("https://cnodejs.org/api/v1/topics?tab=ask"),
+    ]).then((results)=>{
+        console.log(results)
+    })
+    </script>
+</body>
+</html>

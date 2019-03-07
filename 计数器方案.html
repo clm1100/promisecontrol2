@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./jquery.js"></script>
+    <script>
+    
+    $(function(){
+        var arr = [];
+        var count = 0;
+
+        function deal(data){
+            arr.push(data)
+            count++;
+            if(count===4){
+                console.log(arr);
+            }
+        }
+        $.get("https://cnodejs.org/api/v1/topics?tab=ask",function(data){
+            deal(data)
+        })
+        $.get("https://cnodejs.org/api/v1/topics?tab=share",function(data){
+            deal(data)
+        })
+        $.get("https://cnodejs.org/api/v1/topics?tab=good",function(data){
+            deal(data)
+        })
+        $.get("https://cnodejs.org/api/v1/topics?tab=job",function(data){
+            deal(data)
+        })
+
+
+})
+    </script>
+</body>
+</html>

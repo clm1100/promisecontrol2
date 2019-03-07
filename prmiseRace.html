@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script src="./jquery.js"></script>
+<script>
+
+function VueReource(url){
+    var p = new Promise((resovle,reject)=>{
+        $.get(url,(data)=>{
+            resovle(data);
+        })
+    })
+    return p;
+}
+
+Promise.race([
+    new Promise((resolve,reject)=>{
+        resolve("我最快")
+    }),
+    VueReource("https://cnodejs.org/api/v1/topics?tab=ask"),
+    VueReource("https://cnodejs.org/api/v1/topics?tab=share"),
+    VueReource("https://cnodejs.org/api/v1/topics?tab=good"),
+    VueReource("https://cnodejs.org/api/v1/topics?tab=ask"),
+]).then((result)=>{
+    console.log(result)
+})
+
+</script>
+</body>
+</html>

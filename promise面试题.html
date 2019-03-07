@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+setTimeout(function(){console.log('1')});
+
+new Promise(function(resolve,reject){
+    resolve();
+    console.log('2');
+}).then(function(){
+    console.log('3')
+});
+
+console.log('4');
+
+// new Promise((resolve,reject)=>{
+//     resolve()
+//     console.log(1)
+
+// })
+// console.log(2)
+
+//  2,4 3  1
+
+//  2 ,3 4 1
+var p = new Promise((resolve,reject)=>{
+    console.log(123);
+    
+
+})
+p.then(()=>{
+    console.log(345);
+})
+
+
+
+</script>
+</body>
+</html>

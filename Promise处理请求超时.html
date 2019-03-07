@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script src="./jquery.js"></script>
+<script>
+
+// $.ajax({
+// 　　url:'https://cnodejs.org/api/v1/topics?tab=good',  //请求的URL
+// 　　timeout : 1000, //超时时间设置，单位毫秒
+// 　　type : 'get',  //请求方式，get或post
+// 　　data :{},  //请求所传参数，json格式
+// 　　dataType:'json',//返回的数据格式
+// 　　success:function(data){ //请求成功的回调函数
+// 　　　　alert("成功");
+// 　　},
+//     error:function(){
+//         console.log("超时了")
+//     }
+// });
+
+function VueReource(url){
+    return new Promise((resolve,reject)=>{
+        $.get(url,(data)=>{
+            resolve(data);
+        })
+    })
+}
+
+function timeout(time){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            resolve("超时了");
+        },time)
+    })
+}
+
+Promise.race([
+    VueReource("https://cnodejs.org/api/v1/topics?tab=ask"),
+    timeout(500)
+]).then((data)=>{
+    console.log(data)
+})
+
+
+</script>
+</body>
+</html>

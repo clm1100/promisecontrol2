@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script src="./jquery.js"></script>
+<script>
+
+$(function(){
+    // 封装一个promise;
+    var  p  = function(url){
+        return new Promise(function(resolve,reject){
+            $.get(url,function(data){
+            resolve(data);
+            })
+        })
+    }
+    var arr = []
+    var a= 100;
+
+
+    p("https://cnodejs.org/api/v1/topics?tab=ask")
+    .then(function(data){
+        var a = 300
+        arr.push(data);
+        return p("https://cnodejs.org/api/v1/topics?tab=share")
+    }).then(function(data){
+        console.log(a)
+        arr.push(data);
+        return p("https://cnodejs.org/api/v1/topics?tab=ask")
+    }).then(function(data){
+        arr.push(data);
+        return p("https://cnodejs.org/api/v1/topics?tab=good")
+    }).then(function(data){
+        arr.push(data);
+        console.log(arr);
+    })      
+})
+</script>
+</body>
+</html>
